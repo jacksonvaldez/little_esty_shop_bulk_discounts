@@ -68,4 +68,8 @@ RSpec.describe 'Merchant Discounts index page' do
     expect(current_path).to eq("/merchant/#{@merchant1.id}/discounts/#{@bulk_discount_2.id}")
   end
 
+  it 'it displays the nameand date of the next 3 upcoming US holidays' do
+    
+  end
+
 end
