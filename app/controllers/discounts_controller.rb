@@ -28,4 +28,8 @@ class DiscountsController < ApplicationController
     redirect_to action: :index
   end
 
+  def edit
+    @discount = BulkDiscount.find(params[:id])
+  end
+
 end
