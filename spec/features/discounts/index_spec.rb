@@ -95,7 +95,7 @@ RSpec.describe 'Merchant Discounts index page' do
   end
 
   it 'it displays the name and date of the next 3 upcoming US holidays' do
-    holiday_data = NagerData.new.next_holidays(3)
+    holiday_data = NagerData.new.next_holidays("US", 3)
 
     expect(page).to have_content(holiday_data[0][:name])
     expect(page).to have_content(holiday_data[0][:date])
