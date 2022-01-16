@@ -71,6 +71,12 @@ RSpec.describe 'Merchant Discounts index page' do
     expect(current_path).to eq("/merchant/#{@merchant1.id}/discounts/#{@bulk_discount_2.id}")
   end
 
+  it 'When you click the Create Discount link, it takes you to correct path' do
+    click_link("Create Discount")
+
+    expect(current_path).to eq("/merchant/#{@merchant1.id}/discounts/new")
+  end
+
   it 'it displays the name and date of the next 3 upcoming US holidays' do
     holiday_data = NagerData.new.next_holidays(3)
 

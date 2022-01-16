@@ -7,6 +7,7 @@
     </p>
   </div>
 <% end %>
+<%= link_to "Create Discount", "/merchant/#{@merchant.id}/discounts/new" %>
 
 <h3>Upcoming Holidays</h3>
 <% @next_holidays.each do |holiday| %>
