@@ -32,4 +32,13 @@ class DiscountsController < ApplicationController
     @discount = BulkDiscount.find(params[:id])
   end
 
+  def update
+    discount = BulkDiscount.find(params[:id])
+    discount.update(
+      quantity_threshold: params[:quantity_threshold],
+      percent_discount: params[:percent_discount]
+    )
+    redirect_to action: :show
+  end
+
 end
