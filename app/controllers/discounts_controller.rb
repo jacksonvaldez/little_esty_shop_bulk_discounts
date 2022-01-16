@@ -11,7 +11,16 @@ class DiscountsController < ApplicationController
   end
 
   def new
-    @discount = BulkDiscount.new
+    @merchant_id = params[:merchant_id]
+  end
+
+  def create
+    BulkDiscount.create(
+      quantity_threshold: params[:quantity_threshold],
+      percent_discount: params[:percent_discount],
+      merchant_id: params[:merchant_id]
+    )
+    redirect_to action: :index
   end
 
 end
