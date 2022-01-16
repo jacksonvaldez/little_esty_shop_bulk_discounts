@@ -23,4 +23,9 @@ class DiscountsController < ApplicationController
     redirect_to action: :index
   end
 
+  def destroy
+    BulkDiscount.find(params[:id]).destroy
+    redirect_to action: :index
+  end
+
 end

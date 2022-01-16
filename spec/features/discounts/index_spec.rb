@@ -77,6 +77,15 @@ RSpec.describe 'Merchant Discounts index page' do
     expect(current_path).to eq("/merchant/#{@merchant1.id}/discounts/new")
   end
 
+  it 'When you click the delete link next to each discount, it deletes it' do
+    within "#discount-#{@bulk_discount_2.id}" do
+      click_link("Delete")
+    end
+
+    expect(current_path).to eq("/merchant/#{@merchant1.id}/discounts")
+    expect(page).to_not have_content("##{@bulk_discount_2.id} - 15 items, 25% off")
+  end
+
   it 'it displays the name and date of the next 3 upcoming US holidays' do
     holiday_data = NagerData.new.next_holidays(3)
 
