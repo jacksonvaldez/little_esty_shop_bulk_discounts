@@ -68,8 +68,15 @@ RSpec.describe 'Merchant Discounts index page' do
     expect(current_path).to eq("/merchant/#{@merchant1.id}/discounts/#{@bulk_discount_2.id}")
   end
 
-  it 'it displays the nameand date of the next 3 upcoming US holidays' do
-    
+  it 'it displays the name and date of the next 3 upcoming US holidays' do
+    holiday_data = NagerData.new.next_holidays(3)
+
+    expect(page).to have_content(holiday_data[0][:name])
+    expect(page).to have_content(holiday_data[0][:date])
+    expect(page).to have_content(holiday_data[1][:name])
+    expect(page).to have_content(holiday_data[1][:date])
+    expect(page).to have_content(holiday_data[2][:name])
+    expect(page).to have_content(holiday_data[2][:date])
   end
 
 end

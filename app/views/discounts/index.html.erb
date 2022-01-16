@@ -7,3 +7,8 @@
     </p>
   </div>
 <% end %>
+
+<h3>Upcoming Holidays</h3>
+<% @next_holidays.each do |holiday| %>
+  <p><%= holiday[:name] %>: <%= holiday[:date] %></p>
+<% end %>
