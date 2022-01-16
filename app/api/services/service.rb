@@ -1,11 +1,10 @@
 class Service
 
+  private
+
   def initialize
     @responses = {}
   end
-
-
-  private
 
   def get_url(url)
     if @responses[url].nil? # If a request has not been sent to a url yet, send a request and save the response
