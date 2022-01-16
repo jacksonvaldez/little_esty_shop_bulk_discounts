@@ -15,6 +15,9 @@ class NagerData
     end
   end
 
+
+  private
+
   def service
     @service ||= NagerService.new
   end
