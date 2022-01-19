@@ -14,6 +14,13 @@ task :import, [:merchants] => :environment do
   ActiveRecord::Base.connection.reset_pk_sequence!('merchants')
 end
 
+task :import, [:discounts] => :environment do
+  BulkDiscount.create!(quantity_threshold: 5, percent_discount: 10, merchant_id: 1)
+  BulkDiscount.create!(quantity_threshold: 7, percent_discount: 15, merchant_id: 1)
+  BulkDiscount.create!(quantity_threshold: 15, percent_discount: 20, merchant_id: 1)
+  BulkDiscount.create!(quantity_threshold: 50, percent_discount: 25, merchant_id: 1)
+end
+
 task :import, [:items] => :environment do
   CSV.foreach('db/data/items.csv', headers: true) do |row|
     Item.create!(row.to_hash)

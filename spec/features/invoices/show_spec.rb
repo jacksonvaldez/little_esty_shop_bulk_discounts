@@ -51,6 +51,10 @@ RSpec.describe 'invoices show' do
     @transaction6 = Transaction.create!(credit_card_number: 879799, result: 0, invoice_id: @invoice_6.id)
     @transaction7 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_7.id)
     @transaction8 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_8.id)
+
+    @bulk_discount_1 = BulkDiscount.create!(quantity_threshold: 10, percent_discount: 20, merchant_id: @merchant1.id )
+    @bulk_discount_2 = BulkDiscount.create!(quantity_threshold: 15, percent_discount: 25, merchant_id: @merchant1.id )
+    @bulk_discount_3 = BulkDiscount.create!(quantity_threshold: 20, percent_discount: 30, merchant_id: @merchant1.id )
   end
 
   it "shows the invoice information" do
@@ -98,6 +102,26 @@ RSpec.describe 'invoices show' do
      within("#current-invoice-status") do
        expect(page).to_not have_content("in progress")
      end
+  end
+
+  it 'displays discounted and total revenue by merchant' do
+    visit "/merchant/#{@merchant1.id}/invoices/#{@invoice_1.id}"
+
+    expect(page).to have_content("Total Revenue: $162.0")
+    expect(page).to have_content("Discounted Revenue: $147.6")
+  end
+
+  it 'displays a link to view discount' do
+    visit "/merchant/#{@merchant1.id}/invoices/#{@invoice_1.id}"
+
+    within "#the-status-#{@ii_1.id}" do
+      expect(page).to_not have_link("View Discount")
+      expect(page).to have_content("None")
+    end
+
+    within "#the-status-#{@ii_11.id}" do
+      expect(page).to have_link("View Discount")
+    end
   end
 
 end
